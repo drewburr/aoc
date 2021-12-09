@@ -50,8 +50,8 @@ How many measurements are larger than the previous measurement?
 
 ## Utilities and tools
 
-VSCode
-Python 3.9.8
+- VSCode
+- Python 3.9.8
 
 ## My solution - in words
 

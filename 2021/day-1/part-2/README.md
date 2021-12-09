@@ -40,8 +40,8 @@ Consider sums of a three-measurement sliding window. How many sums are larger th
 
 ## Utilities and tools
 
-VSCode
-Python 3.9.8
+- VSCode
+- Python 3.9.8
 
 ## My solution - in words
 
