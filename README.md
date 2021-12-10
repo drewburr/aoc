@@ -1,2 +1,3 @@
 # aoc
-My attempts at the Advent of Code challenges
+
+My attempts at the [Advent of Code](https://adventofcode.com/) challenges
