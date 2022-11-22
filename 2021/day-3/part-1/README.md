@@ -38,10 +38,10 @@ Use the binary numbers in your diagnostic report to calculate the gamma rate and
 ## Utilities and tools
 
 - VSCode
-- Python 3.9.8
+- Python 3.10.6
 
 ## My solution - in words
 
 I think a class is the way to go on this one. Provide a way to stream in each line of binary, then have the class keep track of the number of lines, as well as the number of `1`s that appear in each index. Both pieces of data together will tell me whether there were more ones or zeroes in each index.
 
-### Issues
+I originally ran into issues with programmatically converting binary to base 10. I probably could have used an online converter, but that'd be too easy. I also had to change up the way I was importing data, due to newlines being a problem. My solution would not work well for very large data sets because I am importing all data at once, then streaming it into my diagnostic class. It would be relatively simple to convert this into something that reads in one line at a time, severely reducing the overall memory load.
