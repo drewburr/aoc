@@ -18,3 +18,5 @@ My attempts at the [Advent of Code](https://adventofcode.com/) challenges
 - [Day 6 Part 2](./2021/day-6/part-2)
 - [Day 7 Part 1](./2021/day-7/part-1)
 - [Day 7 Part 2](./2021/day-7/part-2)
+- [Day 8 Part 1](./2021/day-8/part-1)
+- [Day 8 Part 2](./2021/day-8/part-2)
