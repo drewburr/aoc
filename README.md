@@ -2,6 +2,13 @@
 
 My attempts at the [Advent of Code](https://adventofcode.com/) challenges
 
+## 2022
+
+| Day # | Part 1 Link | Part 2 Link | Time |
+| -- | -- | -- | -- |
+| Day 1 | [Part 1 & 2](./2022/day-1/) | | 7 minutes |
+| Day 2 | [Part 1](./2022/day-2/part-1) | [Part 2](./2022/day-2/part-2) | 15 minutes |
+
 ## 2021
 
 | Day # | Part 1 Link | Part 2 Link |
