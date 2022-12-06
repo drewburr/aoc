@@ -1,10 +1,9 @@
 import string
 
 data = []
+alphabet=string.ascii_letters
 
-# String containing the entire alphabet
-alphabet=string.ascii_lowercase+string.ascii_uppercase
-
+# Get and format input data
 for l in open('input.txt'):
     l = l.strip()
 
@@ -15,6 +14,7 @@ for l in open('input.txt'):
 
 total = 0
 
+# Check for cross-compartment duplicates
 for c1, c2 in data:
     print(c1, c2)
     val = 0
@@ -28,4 +28,5 @@ for c1, c2 in data:
 
     total += val
 
+# Print answer
 print(total)
