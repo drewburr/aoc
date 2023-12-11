@@ -29,23 +29,75 @@ def parse_input():
 def traverse(steps: tuple[str], data: dict):
     is_start = lambda x: x[2] == 'A'
     is_in_progress = lambda x: x[2] != 'Z'
-    currents = filter(is_start, data.keys())
+    currents = list(filter(is_start, data.keys()))
     total = 0
+    lengths = [0] * len(currents)
+    current_length = [0] * len(currents)
+    start_length = [0] * len(currents)
 
     while True:
         for step in steps:
             total += 1
-            currents = [data[current][step] for current in currents]
+
+            for i, current in enumerate(currents):
+                currents[i] = data[current][step]
+                current_length[i] += 1
+
+                if not is_in_progress(currents[i]):
+                    lengths[i] = current_length[i]
+
+                    if not start_length[i]:
+                        start_length[i] = current_length[i]
+
+                    current_length[i] = 0
+
+            if not 0 in start_length:
+                return start_length
+
             in_progress = list(filter(is_in_progress, currents))
             if not in_progress:
                 return total
 
+            if len(in_progress) < (len(currents)):
+                print('start', start_length)
+                print('end  ', lengths)
+                print(currents, len(currents) - len(in_progress), total)
+                # return
+            # else:
+            #     print(currents)
+
+def find_factors(x: int):
+    i = 2
+    factors = list()
+    while x > i:
+        while x % i == 0:
+            factors.append(i)
+            x = x // i
+
+        i += 1
+
+    factors.append(x)
+    return factors
+
 def main():
     steps, data = parse_input()
 
-    total = traverse(steps, data)
-    print(total)
+    distances = traverse(steps, data)
 
+    distance_factors = [find_factors(d) for d in distances]
+
+    distance_factors = set([i for l in distance_factors for i in l])
+
+    lcm = 1
+    for i in distance_factors:
+        lcm *= i
+
+    print(distance_factors)
+    print(lcm)
+
+
+
+14,265,111,103,729
 
 if __name__ == "__main__":
     main()
