@@ -1,8 +1,9 @@
 from bitarray import bitarray
 
 input_file = "input.txt"
+# input_file = "example.txt"
 
-part = 1
+part = 2
 
 class Instruction:
     def __init__(self, action, start, end):
@@ -12,12 +13,17 @@ class Instruction:
 
 
 instructions: list[Instruction] = []
-lights: list[bitarray] = []
-
 grid_size = 1000
 
-for _ in range(grid_size):
-    lights.append(bitarray(grid_size))
+if part == 1:
+    lights: list[bitarray] = []
+    for _ in range(grid_size):
+        lights.append(bitarray(grid_size))
+else:
+    brightLights: list[int] = []
+    for _ in range(grid_size):
+        brightLights.append([0] * grid_size)
+
 
 for l in open(input_file):
     l = l.strip().removeprefix('turn ')
@@ -31,20 +37,37 @@ for l in open(input_file):
     instructions.append(Instruction(action, start, end))
 
 def toggle(start: tuple[int], end: tuple[int]):
-    # XOR ranges
-    for x in range(start[0], end[0]+1):
-        strip = lights[x]
-        strip[start[1]:end[1]+1] = ~strip[start[1]:end[1]+1]
+    if part == 1:
+        # XOR ranges
+        for x in range(start[0], end[0]+1):
+            strip = lights[x]
+            strip[start[1]:end[1]+1] = ~strip[start[1]:end[1]+1]
+    else:
+        updateBrightness(2, start, end)
+
 
 def on(start: tuple[int], end: tuple[int]):
-    # Set ranges high
-    for x in range(start[0], end[0]+1):
-        lights[x][start[1]:end[1]+1] = 1
+    if part == 1:
+        # Set ranges high
+        for x in range(start[0], end[0]+1):
+            lights[x][start[1]:end[1]+1] = 1
+    else:
+        updateBrightness(1, start, end)
 
 def off(start: tuple[int], end: tuple[int]):
-    # Set ranges low
+    if part == 1:
+        # Set ranges low
+        for x in range(start[0], end[0]+1):
+            lights[x][start[1]:end[1]+1] = 0
+    else:
+        updateBrightness(-1, start, end)
+
+def updateBrightness(change, start, end):
     for x in range(start[0], end[0]+1):
-        lights[x][start[1]:end[1]+1] = 0
+        for y in range(start[1], end[1]+1):
+            brightLights[x][y] += change
+            if brightLights[x][y] < 0:
+                brightLights[x][y] = 0
 
 actions = {
     'toggle': toggle,
@@ -55,7 +78,10 @@ actions = {
 for inst in instructions:
     actions[inst.action](inst.start, inst.end)
 
-# Sum all high bits
-print(sum(map(
-    bitarray.count, lights
-)))
+if part == 1:
+    # Sum all high bits
+    print(sum(map(
+        bitarray.count, lights
+    )))
+else:
+    print(sum(map(sum, brightLights)))
